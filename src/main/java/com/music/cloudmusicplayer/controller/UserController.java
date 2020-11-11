@@ -1,11 +1,10 @@
 package com.music.cloudmusicplayer.controller;
 
+import com.music.cloudmusicplayer.entity.User;
 import com.music.cloudmusicplayer.service.UserService;
 import com.music.cloudmusicplayer.util.Result;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -25,5 +24,35 @@ public class UserController {
         Result<Integer> result = new Result<>();
         System.out.println(userName+" "+userPassword);
         return Result.generateSuccessfulResult(null);
+    }
+
+    @PostMapping("/register")
+    public Result<Integer> register(@RequestBody User user) {
+        System.out.println("register: "+user);
+        Result<Integer> result = new Result<>();
+
+        result.setCode(HttpStatus.OK.value());
+        result.setMessage("success");
+        return result;
+    }
+
+    @PostMapping("/findPassword")
+    public Result<Integer> findPassword(@RequestBody User user) {
+        System.out.println("findPassword: "+user);
+        Result<Integer> result = new Result<>();
+
+        result.setCode(HttpStatus.OK.value());
+        result.setMessage("success");
+        return result;
+    }
+
+    @PutMapping("/modify")
+    public Result<Integer> modifyPersonalMsg(@RequestBody User user) {
+        System.out.println("modify: "+user);
+        Result<Integer> result = new Result<>();
+
+        result.setCode(HttpStatus.OK.value());
+        result.setMessage("success");
+        return result;
     }
 }

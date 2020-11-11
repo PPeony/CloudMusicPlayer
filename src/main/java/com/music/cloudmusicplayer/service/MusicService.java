@@ -22,7 +22,7 @@ public interface MusicService {
      */
     Music getMusic(Integer musicId);
 
-    /** 通过各种条件查询
+    /** 通过各种条件查询,按照主键顺序返回
      * @param music
      * @return com.github.pagehelper.PageInfo<com.music.cloudmusicplayer.entity.Music>
      */
