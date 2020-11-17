@@ -46,4 +46,18 @@ public class CloudMusicUtil {
         }
     }
 
+    /**
+     * @param param
+     * @return boolean 出现问题返回true
+     */
+    public static boolean checkString(String param) {
+        if (param == null) {
+            return true;
+        }
+        if (param.length() == 0) {
+            return true;
+        }
+        return false;
+    }
+
 }

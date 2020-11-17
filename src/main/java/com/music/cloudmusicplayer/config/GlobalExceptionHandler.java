@@ -22,7 +22,11 @@ public class GlobalExceptionHandler {
         log.error("error: ",e);
         e.printStackTrace();
         Result result = new Result();
-        if (e instanceof org.springframework.web.servlet.NoHandlerFoundException) {
+        if (e instanceof TokenException) {
+            // 401
+            result.setCode(HttpStatus.UNAUTHORIZED.value());
+            result.setMessage(e.getMessage());
+        } else if (e instanceof org.springframework.web.servlet.NoHandlerFoundException) {
             //404
             result.setCode(HttpStatus.NOT_FOUND.value());
             result.setMessage("找不到页面");

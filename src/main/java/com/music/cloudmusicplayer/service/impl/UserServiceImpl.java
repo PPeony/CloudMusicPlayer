@@ -6,6 +6,8 @@ import com.music.cloudmusicplayer.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: Peony
@@ -21,23 +23,60 @@ public class UserServiceImpl implements UserService {
     public User findUserById(Integer userId) {
         User user = new User();
         user.setUserId(userId);
-        return userMapper.selectByUser(user);
+        List<User> list = userMapper.selectByUser(user);
+        return list.size() == 0 ? null : list.get(0);
     }
 
     @Override
     public User login(User user) {
-        User selectedUser = userMapper.selectByUser(user);
-        return selectedUser;
+        List<User> selectedUser = userMapper.selectByUser(user);
+
+        return selectedUser.size() == 0 ? null : selectedUser.get(0);
     }
 
     @Override
     public Integer insertUser(User user) {
+        // 用户名,邮箱唯一
+        User user1 = new User();
+        user1.setUserName(user.getUserName());
+        List<User> list = userMapper.selectByUser(user1);
+        if (list.size() != 0) {
+            return 0;
+        }
+        user1.setUserName(null);
+        user1.setUserEmail(user.getUserEmail());
+        list = userMapper.selectByUser(user1);
+        if (list.size() != 0) {
+            return 0;
+        }
+        // todo,密码md5加密
+        user.setGmtCreated(new Date());
+        user.setGmtModified(new Date());
+        user.setIsDeleted(0);
         userMapper.insert(user);
         return 1;
     }
 
     @Override
     public Integer updateUser(User user) {
+//        修改名字和email注意不能重复
+        if (user.getUserName() != null) {
+            User u = new User();
+            u.setUserName(user.getUserName());
+            List<User> list = userMapper.selectByUser(u);
+            if (list.size() != 0) {
+                return 0;
+            }
+        }
+        if (user.getUserEmail() != null) {
+            User u = new User();
+            u.setUserName(user.getUserEmail());
+            List<User> list = userMapper.selectByUser(u);
+            if (list.size() != 0) {
+                return 0;
+            }
+        }
+        user.setGmtModified(new Date());
         userMapper.update(user);
         return 1;
     }
@@ -48,13 +87,13 @@ public class UserServiceImpl implements UserService {
         // 根据名字，邮箱查询是否有一样的，若有一样说明可以修改
         origin.setUserName(user.getUserName());
         origin.setUserEmail(user.getUserEmail());
-        User selected = userMapper.selectByUser(origin);
-        if (selected == null) {
+        List<User> selected = userMapper.selectByUser(origin);
+        if (selected.size() == 0) {
             return false;
         }
         User newUser = new User();
         // 设置修改用户的id
-        newUser.setUserId(selected.getUserId());
+        newUser.setUserId(selected.get(0).getUserId());
         newUser.setUserPassword(user.getUserPassword());
         userMapper.update(newUser);
         return true;

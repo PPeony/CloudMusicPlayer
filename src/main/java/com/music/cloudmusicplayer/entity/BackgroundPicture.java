@@ -12,8 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BackgroundPicture {
+
     private Integer backgroundPictureId;
+
     private Integer userId;
+
     private String backgroundPicturePath;
+
     private Integer isDeleted;
 }

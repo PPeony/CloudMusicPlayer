@@ -5,18 +5,25 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.music.cloudmusicplayer.config.TokenException;
 import com.music.cloudmusicplayer.entity.User;
 import com.music.cloudmusicplayer.service.UserService;
 import com.music.cloudmusicplayer.util.annotations.PassToken;
 import com.music.cloudmusicplayer.util.annotations.UserLoginToken;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: Peony
@@ -29,7 +36,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
         String token = httpServletRequest.getHeader("token");// 从 http 请求头中取出 token
-        System.out.println(" fin token is:"+token+"====");
+
+        System.out.println(" find token is:"+token+"====");
         // 如果不是映射到方法直接通过
         if (!(object instanceof HandlerMethod)) {
             return true;
@@ -49,19 +57,25 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             if (userLoginToken.required()) {
                 // 执行认证
                 if (token == null) {
-                    throw new RuntimeException("无token，请重新登录");
+
+                    throw new TokenException("无token，请重新登录");
                 }
                 // 获取 token 中的 user id
                 String userId;
                 try {
                     userId = JWT.decode(token).getAudience().get(0);
+                    System.out.println("get userId = "+userId);
+                    // 设置userId字段
+                    httpServletRequest.setAttribute("userId",userId);
                 } catch (JWTDecodeException j) {
-                    throw new RuntimeException("401");
+
+                    throw new TokenException("token解析错误");
                 }
                 User user = userService.findUserById(Integer.valueOf(userId));
 
                 if (user == null) {
-                    throw new RuntimeException("用户不存在，请重新登录");
+
+                    throw new TokenException("用户不存在，请重新登录");
                 }
 
 
@@ -70,12 +84,16 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 try {
                     jwtVerifier.verify(token);
                 } catch (JWTVerificationException e) {
-                    throw new RuntimeException("401");
+
+                    throw new TokenException("token解析错误");
                 }
                 return true;
             }
         }
         return true;
     }
+
+
+
 
 }

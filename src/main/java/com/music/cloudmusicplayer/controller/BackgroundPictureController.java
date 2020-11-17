@@ -2,7 +2,9 @@ package com.music.cloudmusicplayer.controller;
 
 import com.music.cloudmusicplayer.entity.BackgroundPicture;
 import com.music.cloudmusicplayer.service.BackgroundPictureService;
+import com.music.cloudmusicplayer.util.CloudMusicUtil;
 import com.music.cloudmusicplayer.util.Result;
+import com.music.cloudmusicplayer.util.annotations.UserLoginToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,21 +23,25 @@ public class BackgroundPictureController {
     @Resource
     BackgroundPictureService backgroundPictureService;
 
-    @GetMapping("/{userId}")
-    public Result<BackgroundPicture> getUserPicture(@PathVariable Integer userId, HttpServletRequest request) {
-        String s = request.getParameter("token");
-        System.out.println(userId+" "+s);
-        Result<BackgroundPicture> result = new Result<>();
 
+    @GetMapping("/{userId}")
+    public Result<BackgroundPicture> getUserPicture(@PathVariable Integer userId) {
+        Result<BackgroundPicture> result = new Result<>();
+        BackgroundPicture picture = backgroundPictureService.getPictureByUserId(userId);
         result.setMessage("success");
         result.setCode(HttpStatus.OK.value());
+        result.setData(picture);
         return result;
     }
 
-    @PostMapping("/upload")
-    public Result<Integer> uploadPicture(MultipartFile picture) {
-        Result<Integer> result = new Result<>();
 
+    @PostMapping("/upload")
+    public Result<Integer> uploadPicture(MultipartFile picture,BackgroundPicture backgroundPicture
+    ,HttpServletRequest request) {
+        Result<Integer> result = new Result<>();
+        String path = CloudMusicUtil.uploadFile(picture,request);
+        backgroundPicture.setBackgroundPicturePath(path);
+        backgroundPictureService.uploadPicture(backgroundPicture);
         result.setMessage("success");
         result.setCode(HttpStatus.CREATED.value());
         return result;
@@ -44,7 +50,7 @@ public class BackgroundPictureController {
     @DeleteMapping("/delete/{backgroundPictureId}")
     public Result<Integer> deletePicture(@PathVariable Integer backgroundPictureId) {
         Result<Integer> result = new Result<>();
-
+        backgroundPictureService.deletePicture(backgroundPictureId);
         result.setMessage("success");
         result.setCode(HttpStatus.OK.value());
         return result;

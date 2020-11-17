@@ -6,8 +6,8 @@
 ## User
 |说明|url|请求方式|example|result|
 |---|---|---|---|---|
-|注册|/user/login|post|{"userPassword": "demoData","userName": "demoData"}|{"message":"success""code":200,"data":null}
-|登录|/user/register|post|{<br/>"userPassword": "demoData",<br/>"userName": "demoData",<br>"userEmail": "demoData"<br>}|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
+|登录|/user/login|post|{"userPassword": "demoData","userName": "demoData"}|{"message":"success""code":200,"data":null}
+|注册|/user/register|post|{<br/>"userPassword": "demoData",<br/>"userName": "demoData",<br>"userEmail": "demoData"<br>}|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
 |找回密码<br>输入正确的用户名和邮箱就能重设密码|/user/findPassword|post|{<br>"userPassword": "newPassword",<br>"userName": "demoData",<br>"userEmail": "demoData"<br>}|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
 |修改个人信息|/user/modify|put|{<br>"userPassword": "newPassword",<br>"userName": "demoData",<br>"userEmail": "demoData"<br>}|{<br>"message":"success",<br>"code":201,<br>"data":null<br>}
 

@@ -14,13 +14,22 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Music {
+
     private Integer musicId;
+
     private Integer userId;
+
     private String musicName;
+
     private String musicSinger;
+
     private Integer musicTime;
+
     private String musicLyrics;
+
     private String musicPath;
+
     private Date gmtCreated;
+
     private Integer isDeleted;
 }
