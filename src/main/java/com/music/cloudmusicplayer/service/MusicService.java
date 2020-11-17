@@ -3,6 +3,8 @@ package com.music.cloudmusicplayer.service;
 import com.github.pagehelper.PageInfo;
 import com.music.cloudmusicplayer.entity.Music;
 
+import java.util.List;
+
 /**
  * @Author: Peony
  * @Date: 2020/11/10 14:23
@@ -14,7 +16,7 @@ public interface MusicService {
 	 * @param type ,排序方式(音乐名称和歌手名称两种)，默认为主键id
      * @return com.github.pagehelper.PageInfo<com.music.cloudmusicplayer.entity.Music>
      */
-    PageInfo<Music> getAllMusicByUserId(Integer userId,String type);
+    List<Music> getAllMusicByUserId(Integer userId, String type);
 
     /** 通过id得到music
      * @param musicId
@@ -26,7 +28,7 @@ public interface MusicService {
      * @param music
      * @return com.github.pagehelper.PageInfo<com.music.cloudmusicplayer.entity.Music>
      */
-    PageInfo<Music> searchMusic(Music music);
+    List<Music> searchMusic(Music music);
 
     /** 上传music
      * @param music

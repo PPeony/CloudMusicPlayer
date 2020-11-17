@@ -24,7 +24,7 @@ public interface MusicListService {
 	 * @param type 排序方式（音乐名称，歌手名称），默认为主键id
      * @return java.util.List<com.music.cloudmusicplayer.entity.Music>
      */
-    List<Music> getMusicListDetails(Integer musicListId,String type);
+    List<MusicListDetail> getMusicListDetails(Integer musicListId,String type);
 
     /**
      * 创建新歌单
@@ -50,13 +50,11 @@ public interface MusicListService {
      */
     Integer addMusicToList(Integer musicId,Integer musicListId);
 
-    /**
-     * 删除某个歌单的某个音乐
-     * @param musicId
-	 * @param musicListId
+    /** 删除detail
+     * @param musicListDetailId
      * @return java.lang.Integer
      */
-    Integer deleteMusicFromList(Integer musicId,Integer musicListId);
+    Integer deleteMusicFromList(Integer musicListDetailId);
 
     /**
      * 删除整个歌单

@@ -16,7 +16,7 @@ import java.util.Date;
 public class MusicListDetail {
     private Integer musicListDetailId;
     private Integer musicListId;
-    private Integer musicId;
+    private Music music;
     private Date gmtCreated;
     private Integer isDeleted;
 }

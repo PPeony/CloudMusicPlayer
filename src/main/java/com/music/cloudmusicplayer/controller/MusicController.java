@@ -3,12 +3,14 @@ package com.music.cloudmusicplayer.controller;
 import com.github.pagehelper.PageInfo;
 import com.music.cloudmusicplayer.entity.Music;
 import com.music.cloudmusicplayer.service.MusicService;
+import com.music.cloudmusicplayer.util.CloudMusicUtil;
 import com.music.cloudmusicplayer.util.Result;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Author: Peony
@@ -32,18 +34,8 @@ public class MusicController {
     }
 
     @GetMapping
-    public Result<Music> getAllMusic(String token) {
+    public Result<PageInfo<Music>> getAllMusic(String token,HttpServletRequest request) {
         System.out.println("getAllMusic: "+token);
-        Result<Music> result = new Result<>();
-
-        result.setCode(HttpStatus.OK.value());
-        result.setMessage("success");
-        return result;
-    }
-
-    @GetMapping("/search")
-    public Result<PageInfo<Music>> searchMusic(Music music,Integer pageNum,Integer pageSize) {
-        System.out.println("searchMusic: "+music+"*"+pageNum+"*"+pageSize);
         Result<PageInfo<Music>> result = new Result<>();
 
         result.setCode(HttpStatus.OK.value());
@@ -51,11 +43,33 @@ public class MusicController {
         return result;
     }
 
-    @PostMapping("/upload")
-    public Result<Integer> uploadMusic(MultipartFile music,String token) {
-        Result<Integer> result = new Result<>();
+    @GetMapping("/search")
+    public Result<Music> searchMusic(Music music,Integer pageNum,Integer pageSize) {
+        System.out.println("searchMusic: "+music+"*"+pageNum+"*"+pageSize);
+        Result<Music> result = new Result<>();
 
         result.setCode(HttpStatus.OK.value());
+        result.setMessage("success");
+        return result;
+    }
+
+    @PostMapping("/upload")
+    public Result<String> uploadMusic(String token,MultipartFile music, HttpServletRequest request) {
+        Result<String> result = new Result<>();
+        System.out.println("token = "+token);
+        String path = CloudMusicUtil.uploadFile(music, request);
+        System.out.println(path);
+        result.setCode(HttpStatus.CREATED.value());
+        result.setMessage("success");
+        result.setData(path);
+        return result;
+    }
+
+    @PostMapping("/uploadByUrl")
+    public Result<String> uploadMusicByUrl(String url,String token) {
+        Result<String> result = new Result<>();
+
+        result.setCode(HttpStatus.CREATED.value());
         result.setMessage("success");
         return result;
     }

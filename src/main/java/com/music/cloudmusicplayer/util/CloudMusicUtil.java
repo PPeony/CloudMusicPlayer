@@ -12,7 +12,7 @@ import java.util.UUID;
  * @Author: Peony
  * @Date: 2020/11/10 14:27
  */
-public class PictureUtil {
+public class CloudMusicUtil {
 
     public static String uploadFile(MultipartFile file, HttpServletRequest request) {
 
@@ -26,7 +26,7 @@ public class PictureUtil {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        System.out.println("图片上传，保存位置：" + Property.FILE_PATH + directory);
+        System.out.println("文件上传，保存位置：" + Property.FILE_PATH + directory);
         //3.给文件重新设置一个名字
         //后缀
         String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
@@ -37,9 +37,9 @@ public class PictureUtil {
         try {
             file.transferTo(newFile);
             //协议 :// ip地址 ：端口号 / 文件目录(/images/2020/03/15/xxx.jpg)
-            String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/images/" + directory + newFileName;
+            String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/musicfile/" + directory + newFileName;
             System.out.println("图片上传，访问URL：" + url);
-            return newFileName;
+            return url;
         } catch (IOException e) {
             e.printStackTrace();
             return "error";

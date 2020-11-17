@@ -3,10 +3,13 @@ package com.music.cloudmusicplayer.controller;
 import com.music.cloudmusicplayer.entity.User;
 import com.music.cloudmusicplayer.service.UserService;
 import com.music.cloudmusicplayer.util.Result;
+import com.music.cloudmusicplayer.util.TokenUtil;
+import com.music.cloudmusicplayer.util.annotations.UserLoginToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Author: Peony
@@ -20,9 +23,24 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/login")
-    public Result<Integer> login(String userName,String userPassword) {
+    public Result<Integer> login(@RequestBody User user, HttpServletResponse response) {
         Result<Integer> result = new Result<>();
-        System.out.println(userName+" "+userPassword);
+        // success:
+        User selectedUser = userService.login(user);
+        selectedUser = new User();
+        selectedUser.setUserId(1);
+        selectedUser.setUserName("1");
+        selectedUser.setUserPassword("12345678");
+        String token = TokenUtil.getToken(selectedUser);
+        response.setHeader("token",token);
+        return Result.generateSuccessfulResult(null);
+    }
+
+    @UserLoginToken
+    @GetMapping("/testToken")
+    public Result<Integer> testToken() {
+        Result<Integer> result = new Result<>();
+        System.out.println("success");
         return Result.generateSuccessfulResult(null);
     }
 

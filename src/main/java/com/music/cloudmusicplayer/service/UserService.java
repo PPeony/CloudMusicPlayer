@@ -8,10 +8,16 @@ import com.music.cloudmusicplayer.entity.User;
  */
 public interface UserService {
     /**
+     * @param userId
+     * @return com.music.cloudmusicplayer.entity.User
+     */
+    User findUserById(Integer userId);
+
+    /**
      * @param user
      * @return java.lang.Boolean
      */
-    Boolean login(User user);
+    User login(User user);
 
     /**
      * @param user

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.music.cloudmusicplayer.dao.MusicListMapper">
+    <resultMap id="MusicListMap" type="com.music.cloudmusicplayer.entity.MusicList">
+        <id column="music_list_id" jdbcType="INTEGER" property="musicListId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="music_list_name" jdbcType="VARCHAR" property="musicListName" />
+        <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    </resultMap>
+
+    <resultMap id="MusicMap" type="com.music.cloudmusicplayer.entity.Music">
+        <id column="music_id" jdbcType="INTEGER" property="musicId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="music_name" jdbcType="VARCHAR" property="musicName" />
+        <result column="music_singer" jdbcType="VARCHAR" property="musicSinger" />
+        <result column="music_time" jdbcType="INTEGER" property="musicTime" />
+        <result column="music_lyrics" jdbcType="LONGNVARCHAR" property="musicName" />
+        <result column="music_path" jdbcType="VARCHAR" property="musicPath" />
+        <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    </resultMap>
+
+    <sql id="Music_List">
+        music_list_id, user_id, music_list_name, gmt_created, is_deleted
+    </sql>
+
+    <sql id="Music">
+        music_id, user_id, music_name, music_singer, music_time, music_lyrics, music_path, gmt_created, is_deleted
+    </sql>
+
+    <select id="selectByUserId" resultMap="MusicListMap">
+        select
+        <include refid="Music_List" />
+        from music_list
+        where user_id = #{param1,jdbcType=INTEGER} and is_deleted = 0 order by music_list_name
+    </select>
+
+
+    <insert id="insert" parameterType="com.music.cloudmusicplayer.entity.MusicList">
+        insert into music_list (user_id,music_list_name,gmt_created,is_deleted
+        )
+        values (#{userId,jdbcType=INTEGER},#{musicListName,jdbcType=VARCHAR},
+        #{gmtCreated,jdbcType=TIMESTAMP},#{isDeleted,jdbcType=INTEGER}
+        )
+    </insert>
+
+
+    <update id="update" parameterType="com.music.cloudmusicplayer.entity.MusicList">
+        update music_list
+        <set>
+            <if test="musicListName != null">
+                music_list_name = #{musicListName,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=INTEGER},
+            </if>
+        </set>
+        where music_list_id = #{musicListId,jdbcType=INTEGER}
+    </update>
+
+
+
+</mapper>

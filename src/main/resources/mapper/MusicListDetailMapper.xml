@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.music.cloudmusicplayer.dao.MusicListDetailMapper">
+    <resultMap id="MusicListMap" type="com.music.cloudmusicplayer.entity.MusicList">
+        <id column="music_list_id" jdbcType="INTEGER" property="musicListId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="music_list_name" jdbcType="VARCHAR" property="musicListName" />
+        <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    </resultMap>
+
+    <resultMap id="MusicMap" type="com.music.cloudmusicplayer.entity.Music">
+        <id column="music_id" jdbcType="INTEGER" property="musicId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="music_name" jdbcType="VARCHAR" property="musicName" />
+        <result column="music_singer" jdbcType="VARCHAR" property="musicSinger" />
+        <result column="music_time" jdbcType="INTEGER" property="musicTime" />
+        <result column="music_lyrics" jdbcType="LONGNVARCHAR" property="musicName" />
+        <result column="music_path" jdbcType="VARCHAR" property="musicPath" />
+        <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+        <result column="is_deleted" jdbcType="INTEGER" property="isDeleted" />
+    </resultMap>
+
+    <resultMap id="MusicListDetailMap"  type="com.music.cloudmusicplayer.entity.MusicListDetail">
+        <id column="music_list_detail_id" jdbcType="INTEGER" property="musicListDetailId"/>
+        <result column="music_list_id" jdbcType="INTEGER" property="musicListId"/>
+        <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+        <association property="music" javaType="com.music.cloudmusicplayer.entity.Music">
+            <id column="music_id" property="musicId"/>
+            <result column="user_id" property="userId" />
+            <result column="music_name" property="musicName" />
+            <result column="music_singer" property="musicSinger" />
+            <result column="music_time" property="musicTime" />
+            <result column="music_lyrics" property="musicName" />
+            <result column="music_path" property="musicPath" />
+        </association>
+
+    </resultMap>
+
+    <sql id="Music_List">
+        music_list_id, user_id, music_list_name, gmt_created, is_deleted
+    </sql>
+
+    <sql id="Music">
+        music_id, user_id, music_name, music_singer, music_time, music_lyrics, music_path, gmt_created, is_deleted
+    </sql>
+
+    <sql id="MusicListDetail">
+        music_list_detail_id,music_list_id,
+        music_id, user_id, music_name, music_singer, music_time, music_lyrics, music_path,
+        gmt_created
+    </sql>
+
+
+    <select id="selectByMusicListId" resultMap="MusicListDetailMap">
+        select
+        <include refid="MusicListDetail" />
+        from (
+          select B.music_list_detail_id,B.music_list_id,B.music_id,B.gmt_created from
+            music_list A right join music_list_detail B on A.music_list_id = B.music_list_id
+          where A.music_list_id = 1 and A.is_deleted = 0 and B.is_deleted = 0
+      ) A left join music B on A.music_id = B.music_id where B.is_deleted = 0
+    </select>
+
+
+
+    <insert id="insert" parameterType="com.music.cloudmusicplayer.entity.MusicListDetail">
+        insert into music_list_detail (music_list_id,music_id,gmt_created,is_deleted
+        )
+        values (#{musicListId,jdbcType=INTEGER},#{musicId,jdbcType=INTEGER},
+                #{gmtCreated,jdbcType=TIMESTAMP},#{isDeleted,jdbcType=INTEGER}
+               )
+    </insert>
+
+
+    <update id="update" parameterType="com.music.cloudmusicplayer.entity.MusicListDetail">
+        update music_list_detail
+        <set>
+            <if test="musicListId != null">
+                music_list_id = #{musicListId,jdbcType=INTEGER},
+            </if>
+            <if test="music.musicId != null">
+                music_id = #{music.musicId,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=INTEGER},
+            </if>
+        </set>
+        <where>
+            <if test="musicListDetailId != null">
+                and music_list_detail_id = #{musicListDetailId,jdbcType=INTEGER}
+            </if>
+            <if test="musicId != null">
+                and music_id = #{music.musicId,jdbcType=INTEGER}
+            </if>
+            <if test="musicListId != null">
+                and music_list_id = #{musicListId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </update>
+
+</mapper>
