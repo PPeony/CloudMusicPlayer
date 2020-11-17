@@ -75,6 +75,7 @@ public class MusicListServiceImpl implements MusicListService {
 
     @Override
     public Integer deleteMusicList(Integer musicListId) {
+        // 修改list表和detail表
         MusicList musicList = new MusicList();
         musicList.setIsDeleted(1);
         musicList.setMusicListId(musicListId);

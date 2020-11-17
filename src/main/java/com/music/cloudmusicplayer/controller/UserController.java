@@ -35,8 +35,6 @@ public class UserController {
         CloudMusicUtil.checkString(user.getUserPassword())) {
             return Result.badRequestResult("请输入用户名或密码");
         }
-
-
         // success:
         User selectedUser = userService.login(user);
         if (selectedUser == null) {
@@ -76,7 +74,7 @@ public class UserController {
     }
 
     @PassToken
-    @PostMapping("/findPassword")
+    @PutMapping("/findPassword")
     public Result<Integer> findPassword(@RequestBody User user) {
         //System.out.println("findPassword: "+user);
         Result<Integer> result = new Result<>();
@@ -90,7 +88,7 @@ public class UserController {
             result.setMessage("用户名或者邮箱输入错误");
             return result;
         }
-        result.setCode(HttpStatus.OK.value());
+        result.setCode(HttpStatus.CREATED.value());
         result.setMessage("success");
         return result;
     }
@@ -106,7 +104,7 @@ public class UserController {
             result.setCode(HttpStatus.BAD_REQUEST.value());
             return result;
         }
-        result.setCode(HttpStatus.OK.value());
+        result.setCode(HttpStatus.CREATED.value());
         result.setMessage("success");
         return result;
     }
