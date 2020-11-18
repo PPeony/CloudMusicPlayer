@@ -3,30 +3,13 @@
 - [Music](#Music)
 - [MusicList](#MusicList)
 - [BackgroundPicture](#BackgroundPicture)
+- [备注](#备注)
 
 ## Attention
 __1. http头部需要携带token:""__ <br>
 __2. 未登录的操作全部返回如下形式，带有*为需登录才能操作的接口:__
-```json
-{
-    "message":"无token，请重新登录",
-    "code":401,
-    "data":null
-}
-```
-<details>
-<summary>测试</summary>
-<pre><code>
-    public Result<List<Music>> searchMusic(Music music) {
-        Result<List<Music>> result = new Result<>();
-        List<Music> list = musicService.searchMusic(music);
-        result.setCode(HttpStatus.OK.value());
-        result.setMessage("success");
-        result.setData(list);
-        return result;
-    }
-</code></pre>
-</details>
+
+
 
 ## User
 |说明|url|请求方式|example|successResult|400
@@ -40,95 +23,7 @@ __2. 未登录的操作全部返回如下形式，带有*为需登录才能操�
 |说明|url|请求方式|example|results|400|
 |---|---|---|---|---|---|
 |根据musicId得到一个music的信息|/music/{musicId}|get|/music/123|{<br>&nbsp;&nbsp;&nbsp;&nbsp;"message":"success",<br>&nbsp;&nbsp;&nbsp;&nbsp;"code":200,<br>&nbsp;&nbsp;&nbsp;&nbsp;"data":<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"userId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicName":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicTime":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicLyrics":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gmtCreated":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isDeleted":0<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>}<br>|{<br>"message":"no such id of music",<br>"code":400,<br>"data":null<br>}
-|*根据用户信息得到该用户所有歌曲|/music|get|可选：type:music_name,music_singer（type默认为music_name）。pageNum（默认为1）。pageSize（默认为10）<br>样例：<br>music?musicName=1|<details><summary>json太长，已折叠</summary><pre><code>
-```json
-{
-                                                                                                                                                                                               "message":"success",
-                                                                                                                                                                                               "code":200,
-                                                                                                                                                                                               "data":
-                                                                                                                                                                                               {
-                                                                                                                                                                                                   "total":5,
-                                                                                                                                                                                                   "list":
-                                                                                                                                                                                                   [
-                                                                                                                                                                                                       {
-                                                                                                                                                                                                           "musicId":2,
-                                                                                                                                                                                                           "userId":1,
-                                                                                                                                                                                                           "musicName":"2",
-                                                                                                                                                                                                           "musicSinger":"zhangsan",
-                                                                                                                                                                                                           "musicTime":90,
-                                                                                                                                                                                                           "musicLyrics":null,
-                                                                                                                                                                                                           "musicPath":"www.baidu.com",
-                                                                                                                                                                                                           "gmtCreated":null,
-                                                                                                                                                                                                           "isDeleted":0
-                                                                                                                                                                                                       },
-                                                                                                                                                                                                       {
-                                                                                                                                                                                                           "musicId":3,
-                                                                                                                                                                                                           "userId":1,
-                                                                                                                                                                                                           "musicName":"3",
-                                                                                                                                                                                                           "musicSinger":"unknown3",
-                                                                                                                                                                                                           "musicTime":null,
-                                                                                                                                                                                                           "musicLyrics":null,
-                                                                                                                                                                                                           "musicPath":"3",
-                                                                                                                                                                                                           "gmtCreated":null,
-                                                                                                                                                                                                           "isDeleted":0
-                                                                                                                                                                                                       },
-                                                                                                                                                                                                       {
-                                                                                                                                                                                                           "musicId":4,
-                                                                                                                                                                                                           "userId":1,
-                                                                                                                                                                                                           "musicName":"4",
-                                                                                                                                                                                                           "musicSinger":"unknown4",
-                                                                                                                                                                                                           "musicTime":null,
-                                                                                                                                                                                                           "musicLyrics":null,
-                                                                                                                                                                                                           "musicPath":"4",
-                                                                                                                                                                                                           "gmtCreated":null,
-                                                                                                                                                                                                           "isDeleted":0
-                                                                                                                                                                                                       },
-                                                                                                                                                                                                       {
-                                                                                                                                                                                                           "musicId":5,
-                                                                                                                                                                                                           "userId":1,
-                                                                                                                                                                                                           "musicName":"5",
-                                                                                                                                                                                                           "musicSinger":"unknown5",
-                                                                                                                                                                                                           "musicTime":null,
-                                                                                                                                                                                                           "musicLyrics":null,
-                                                                                                                                                                                                           "musicPath":"5",
-                                                                                                                                                                                                           "gmtCreated":null,
-                                                                                                                                                                                                           "isDeleted":0
-                                                                                                                                                                                                       },
-                                                                                                                                                                                                       {
-                                                                                                                                                                                                           "musicId":6,
-                                                                                                                                                                                                           "userId":1,
-                                                                                                                                                                                                           "musicName":"demoData",
-                                                                                                                                                                                                           "musicSinger":"demoData",
-                                                                                                                                                                                                           "musicTime":null,
-                                                                                                                                                                                                           "musicLyrics":null,
-                                                                                                                                                                                                           "musicPath":"http://www.wanyiyun.com/111",
-                                                                                                                                                                                                           "gmtCreated":"2020-11-18",
-                                                                                                                                                                                                           "isDeleted":0
-                                                                                                                                                                                                       }
-                                                                                                                                                                                                   ],
-                                                                                                                                                                                                   "pageNum":1,
-                                                                                                                                                                                                   "pageSize":5,
-                                                                                                                                                                                                   "size":5,
-                                                                                                                                                                                                   "startRow":0,
-                                                                                                                                                                                                   "endRow":4,
-                                                                                                                                                                                                   "pages":1,
-                                                                                                                                                                                                   "prePage":0,
-                                                                                                                                                                                                   "nextPage":0,
-                                                                                                                                                                                                   "isFirstPage":true,
-                                                                                                                                                                                                   "isLastPage":true,
-                                                                                                                                                                                                   "hasPreviousPage":false,
-                                                                                                                                                                                                   "hasNextPage":false,
-                                                                                                                                                                                                   "navigatePages":8,
-                                                                                                                                                                                                   "navigatepageNums":
-                                                                                                                                                                                                   [
-                                                                                                                                                                                                       1
-                                                                                                                                                                                                   ],
-                                                                                                                                                                                                   "navigateFirstPage":1,
-                                                                                                                                                                                                   "navigateLastPage":1
-                                                                                                                                                                                               }
-                                                                                                                                                                                           }
-```
-</code></pre></details>
+|*根据用户信息得到该用户所有歌曲|/music|get|可选：type:music_name,music_singer（type默认为music_name）。pageNum（默认为1）。pageSize（默认为10）<br>样例：<br>music?musicName=1|[json太长，点此跳转查看](#备注)
 |搜索符合条件的music|/music/search|get|可选：musicName,musicSinger<br>样例：/music/search?musicName=1|{<br>&nbsp;&nbsp;&nbsp;&nbsp;"message":"success",<br>&nbsp;&nbsp;&nbsp;&nbsp;"code":200,<br>&nbsp;&nbsp;&nbsp;&nbsp;"data":<br>&nbsp;&nbsp;&nbsp;&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"userId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicName":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicTime":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicLyrics":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gmtCreated":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isDeleted":0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;]<br><br>}<br>
 |*上传本地音乐|/music/upload|post|todo|{<br>&nbsp;&nbsp;&nbsp;&nbsp;"message":"success",<br>&nbsp;&nbsp;&nbsp;&nbsp;"code":201,<br>&nbsp;&nbsp;&nbsp;&nbsp;"data":null<br>}<br>
 |*添加音乐链接（必须是能直接搜索并播放出音乐的）|/music/uploadByUrl|post|样例：{<br>&nbsp;&nbsp;&nbsp;&nbsp;"musicName":&nbsp;"demoData",<br>&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":&nbsp;"demoData",<br>&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":&nbsp;"http://www.wanyiyun.com/111"<br>}<br>|{<br>&nbsp;&nbsp;&nbsp;&nbsp;"message":"success",<br>&nbsp;&nbsp;&nbsp;&nbsp;"code":201,<br>&nbsp;&nbsp;&nbsp;&nbsp;"data":null<br>}<br>
@@ -156,3 +51,93 @@ __2. 未登录的操作全部返回如下形式，带有*为需登录才能操�
 |通过用户信息获得他的主页图片|/backgroundPicture/{userId}|get|123|todo
 |上传自己的主页图片|/backgroundPicture/upload|post|MultipartFile|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
 |删除自己的主页图片|/backgroundPicture/delete/{backgroundPictureId}|delete|123|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
+
+## 备注
+1. [点此回到Music](#Music)
+```json
+   {
+                                                                                                                                                                                                  "message":"success",
+                                                                                                                                                                                                  "code":200,
+                                                                                                                                                                                                  "data":
+                                                                                                                                                                                                  {
+                                                                                                                                                                                                      "total":5,
+                                                                                                                                                                                                      "list":
+                                                                                                                                                                                                      [
+                                                                                                                                                                                                          {
+                                                                                                                                                                                                              "musicId":2,
+                                                                                                                                                                                                              "userId":1,
+                                                                                                                                                                                                              "musicName":"2",
+                                                                                                                                                                                                              "musicSinger":"zhangsan",
+                                                                                                                                                                                                              "musicTime":90,
+                                                                                                                                                                                                              "musicLyrics":null,
+                                                                                                                                                                                                              "musicPath":"www.baidu.com",
+                                                                                                                                                                                                              "gmtCreated":null,
+                                                                                                                                                                                                              "isDeleted":0
+                                                                                                                                                                                                          },
+                                                                                                                                                                                                          {
+                                                                                                                                                                                                              "musicId":3,
+                                                                                                                                                                                                              "userId":1,
+                                                                                                                                                                                                              "musicName":"3",
+                                                                                                                                                                                                              "musicSinger":"unknown3",
+                                                                                                                                                                                                              "musicTime":null,
+                                                                                                                                                                                                              "musicLyrics":null,
+                                                                                                                                                                                                              "musicPath":"3",
+                                                                                                                                                                                                              "gmtCreated":null,
+                                                                                                                                                                                                              "isDeleted":0
+                                                                                                                                                                                                          },
+                                                                                                                                                                                                          {
+                                                                                                                                                                                                              "musicId":4,
+                                                                                                                                                                                                              "userId":1,
+                                                                                                                                                                                                              "musicName":"4",
+                                                                                                                                                                                                              "musicSinger":"unknown4",
+                                                                                                                                                                                                              "musicTime":null,
+                                                                                                                                                                                                              "musicLyrics":null,
+                                                                                                                                                                                                              "musicPath":"4",
+                                                                                                                                                                                                              "gmtCreated":null,
+                                                                                                                                                                                                              "isDeleted":0
+                                                                                                                                                                                                          },
+                                                                                                                                                                                                          {
+                                                                                                                                                                                                              "musicId":5,
+                                                                                                                                                                                                              "userId":1,
+                                                                                                                                                                                                              "musicName":"5",
+                                                                                                                                                                                                              "musicSinger":"unknown5",
+                                                                                                                                                                                                              "musicTime":null,
+                                                                                                                                                                                                              "musicLyrics":null,
+                                                                                                                                                                                                              "musicPath":"5",
+                                                                                                                                                                                                              "gmtCreated":null,
+                                                                                                                                                                                                              "isDeleted":0
+                                                                                                                                                                                                          },
+                                                                                                                                                                                                          {
+                                                                                                                                                                                                              "musicId":6,
+                                                                                                                                                                                                              "userId":1,
+                                                                                                                                                                                                              "musicName":"demoData",
+                                                                                                                                                                                                              "musicSinger":"demoData",
+                                                                                                                                                                                                              "musicTime":null,
+                                                                                                                                                                                                              "musicLyrics":null,
+                                                                                                                                                                                                              "musicPath":"http://www.wanyiyun.com/111",
+                                                                                                                                                                                                              "gmtCreated":"2020-11-18",
+                                                                                                                                                                                                              "isDeleted":0
+                                                                                                                                                                                                          }
+                                                                                                                                                                                                      ],
+                                                                                                                                                                                                      "pageNum":1,
+                                                                                                                                                                                                      "pageSize":5,
+                                                                                                                                                                                                      "size":5,
+                                                                                                                                                                                                      "startRow":0,
+                                                                                                                                                                                                      "endRow":4,
+                                                                                                                                                                                                      "pages":1,
+                                                                                                                                                                                                      "prePage":0,
+                                                                                                                                                                                                      "nextPage":0,
+                                                                                                                                                                                                      "isFirstPage":true,
+                                                                                                                                                                                                      "isLastPage":true,
+                                                                                                                                                                                                      "hasPreviousPage":false,
+                                                                                                                                                                                                      "hasNextPage":false,
+                                                                                                                                                                                                      "navigatePages":8,
+                                                                                                                                                                                                      "navigatepageNums":
+                                                                                                                                                                                                      [
+                                                                                                                                                                                                          1
+                                                                                                                                                                                                      ],
+                                                                                                                                                                                                      "navigateFirstPage":1,
+                                                                                                                                                                                                      "navigateLastPage":1
+                                                                                                                                                                                                  }
+                                                                                                                                                                                              }
+```
