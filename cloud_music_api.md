@@ -54,6 +54,8 @@ __2. 未登录的操作全部返回如下形式，带有*为需登录才能操�
 
 ## 备注
 1. /music的Json [点此回到Music](#Music)
+<details>
+<summary>点此展开</summary>
 ```json
 {
   "message":"success",
@@ -141,4 +143,5 @@ __2. 未登录的操作全部返回如下形式，带有*为需登录才能操�
   }
 }
 ```
+</details>
 
