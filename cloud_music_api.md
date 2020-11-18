@@ -53,11 +53,92 @@ __2. 未登录的操作全部返回如下形式，带有*为需登录才能操�
 |删除自己的主页图片|/backgroundPicture/delete/{backgroundPictureId}|delete|123|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
 
 ## 备注
-1. [点此回到Music](#Music)
+1. /music的Json [点此回到Music](#Music)
+```json
+{
+  "message":"success",
+  "code":200,
+  "data":
+  {
+      "total":5,
+      "list":
+      [
+          {
+              "musicId":2,
+              "userId":1,
+              "musicName":"2",
+              "musicSinger":"zhangsan",
+              "musicTime":90,
+              "musicLyrics":null,
+              "musicPath":"www.baidu.com",
+              "gmtCreated":null,
+              "isDeleted":0
+          },
+          {
+              "musicId":3,
+              "userId":1,
+              "musicName":"3",
+              "musicSinger":"unknown3",
+              "musicTime":null,
+              "musicLyrics":null,
+              "musicPath":"3",
+              "gmtCreated":null,
+              "isDeleted":0
+          },
+          {
+              "musicId":4,
+              "userId":1,
+              "musicName":"4",
+              "musicSinger":"unknown4",
+              "musicTime":null,
+              "musicLyrics":null,
+              "musicPath":"4",
+              "gmtCreated":null,
+              "isDeleted":0
+          },
+          {
+              "musicId":5,
+              "userId":1,
+              "musicName":"5",
+              "musicSinger":"unknown5",
+              "musicTime":null,
+              "musicLyrics":null,
+              "musicPath":"5",
+              "gmtCreated":null,
+              "isDeleted":0
+          },
+          {
+              "musicId":6,
+              "userId":1,
+              "musicName":"demoData",
+              "musicSinger":"demoData",
+              "musicTime":null,
+              "musicLyrics":null,
+              "musicPath":"http://www.wanyiyun.com/111",
+              "gmtCreated":"2020-11-18",
+              "isDeleted":0
+          }
+      ],
+      "pageNum":1,
+      "pageSize":5,
+      "size":5,
+      "startRow":0,
+      "endRow":4,
+      "pages":1,
+      "prePage":0,
+      "nextPage":0,
+      "isFirstPage":true,
+      "isLastPage":true,
+      "hasPreviousPage":false,
+      "hasNextPage":false,
+      "navigatePages":8,
+      "navigatepageNums":
+      [
+          1
+      ],
+      "navigateFirstPage":1,
+      "navigateLastPage":1
+  }
+}
+```
 
-
-
-|测试|代码|
-|---|---|
-|tt|mm|
-|json|<details><summary>展开</summary><pre><code>{<br>&nbsp;&nbsp;"message":"success",<br>&nbsp;&nbsp;"code":200,<br>&nbsp;&nbsp;"data":<br>&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"total":5,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"list":<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicId":2,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"userId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicName":"2",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":"zhangsan",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicTime":90,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicLyrics":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":"www.baidu.com",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gmtCreated":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isDeleted":0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicId":3,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"userId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicName":"3",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":"unknown3",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicTime":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicLyrics":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":"3",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gmtCreated":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isDeleted":0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicId":4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"userId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicName":"4",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":"unknown4",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicTime":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicLyrics":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":"4",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gmtCreated":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isDeleted":0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicId":5,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"userId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicName":"5",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":"unknown5",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicTime":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicLyrics":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":"5",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gmtCreated":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isDeleted":0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicId":6,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"userId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicName":"demoData",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":"demoData",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicTime":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicLyrics":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":"http://www.wanyiyun.com/111",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gmtCreated":"2020-11-18",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isDeleted":0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pageNum":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pageSize":5,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"size":5,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"startRow":0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"endRow":4,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pages":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"prePage":0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"nextPage":0,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isFirstPage":true,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isLastPage":true,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hasPreviousPage":false,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"hasNextPage":false,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"navigatePages":8,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"navigatepageNums":<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;],<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"navigateFirstPage":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"navigateLastPage":1<br>&nbsp;&nbsp;}<br>}<br></code></pre></details>|
