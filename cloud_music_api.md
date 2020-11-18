@@ -14,7 +14,13 @@ __2. 未登录的操作全部返回如下形式，带有*为需登录才能操�
     "data":null
 }
 ```
-
+<details>
+<summary>测试</summary>
+<pre><code>
+System.ouy.ptinyln();
+System.ouy.ptinyln();
+</code></pre>
+</details>
 
 ## User
 |说明|url|请求方式|example|successResult|400
