@@ -22,6 +22,7 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public List<Music> getAllMusicByUserId(Integer userId, String type) {
+
         List<Music> list = musicMapper.selectAllMusicByUserId(userId, type);
         return list;
     }

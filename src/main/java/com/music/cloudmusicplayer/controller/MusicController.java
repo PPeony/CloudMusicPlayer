@@ -42,12 +42,9 @@ public class MusicController {
         return result;
     }
 
-    @UserLoginToken
+    //@UserLoginToken
     @GetMapping
-    public Result<PageInfo<Music>> getAllMusic(@RequestParam(required = false,defaultValue = "1",value = "pageNum")Integer pageNum,
-                                               @RequestParam(required = false,defaultValue = "10",value = "pageSize")Integer pageSize,
-                                               String type,
-                                               HttpServletRequest request) {
+    public Result<PageInfo<Music>> getAllMusic(@RequestParam(required = false,defaultValue = "1",value = "pageNum")Integer pageNum,@RequestParam(required = false,defaultValue = "10",value = "pageSize")Integer pageSize,@RequestParam(required = false,defaultValue = "music_name",value = "type")String type,HttpServletRequest request) {
         Integer userId = (Integer)request.getAttribute("userId");
         //System.out.println("userId = "+userId+"*");
         Result<PageInfo<Music>> result = new Result<>();
@@ -60,11 +57,7 @@ public class MusicController {
     }
 
     @GetMapping("/search")
-    public Result<List<Music>> searchMusic(Music music,
-                                     @RequestParam(required = false,defaultValue = "1",value = "pageNum")Integer pageNum,
-                                     @RequestParam(required = false,defaultValue = "10",value = "pageSize")Integer pageSize) {
-        //System.out.println("searchMusic: "+music+"*"+pageNum+"*"+pageSize);
-
+    public Result<List<Music>> searchMusic(Music music) {
         Result<List<Music>> result = new Result<>();
         List<Music> list = musicService.searchMusic(music);
         result.setCode(HttpStatus.OK.value());
@@ -92,6 +85,7 @@ public class MusicController {
     public Result<String> uploadMusicByUrl(Music music,HttpServletRequest request) {
         Result<String> result = new Result<>();
         Integer userId = (Integer)request.getAttribute("userId");
+        userId = 1;
         music.setUserId(userId);
         musicService.uploadMusic(music);
         result.setCode(HttpStatus.CREATED.value());

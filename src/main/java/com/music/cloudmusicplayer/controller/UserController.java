@@ -93,7 +93,7 @@ public class UserController {
         return result;
     }
 
-    @UserLoginToken
+    //@UserLoginToken
     @PutMapping("/modify")
     public Result<Integer> modifyPersonalMsg(@RequestBody User user) {
 //        System.out.println("modify: "+user);

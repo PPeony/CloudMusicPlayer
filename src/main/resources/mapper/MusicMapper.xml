@@ -21,7 +21,7 @@
         select
         <include refid="Base_Column_List" />
         from music
-        where user_id = #{param1,jdbcType=INTEGER} and is_deleted = 0 order by ${param2,jdbcType=VARCHAR}
+        where user_id = #{param1,jdbcType=INTEGER} and is_deleted = 0 order by ${param2}
     </select>
 
     <select id="selectByMusicId" resultMap="BaseResultMap">
