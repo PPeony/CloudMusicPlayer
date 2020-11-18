@@ -17,8 +17,14 @@ __2. 未登录的操作全部返回如下形式，带有*为需登录才能操�
 <details>
 <summary>测试</summary>
 <pre><code>
-System.ouy.ptinyln();
-System.ouy.ptinyln();
+    public Result<List<Music>> searchMusic(Music music) {
+        Result<List<Music>> result = new Result<>();
+        List<Music> list = musicService.searchMusic(music);
+        result.setCode(HttpStatus.OK.value());
+        result.setMessage("success");
+        result.setData(list);
+        return result;
+    }
 </code></pre>
 </details>
 
@@ -35,6 +41,7 @@ System.ouy.ptinyln();
 |---|---|---|---|---|---|
 |根据musicId得到一个music的信息|/music/{musicId}|get|/music/123|{<br>&nbsp;&nbsp;&nbsp;&nbsp;"message":"success",<br>&nbsp;&nbsp;&nbsp;&nbsp;"code":200,<br>&nbsp;&nbsp;&nbsp;&nbsp;"data":<br>&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"userId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicName":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicTime":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicLyrics":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gmtCreated":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isDeleted":0<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>}<br>|{<br>"message":"no such id of music",<br>"code":400,<br>"data":null<br>}
 |*根据用户信息得到该用户所有歌曲|/music|get|可选：type:music_name,music_singer（type默认为music_name）。pageNum（默认为1）。pageSize（默认为10）<br>样例：<br>music?musicName=1|<details><summary>json太长，已折叠</summary><pre><code>
+```json
 {
                                                                                                                                                                                                "message":"success",
                                                                                                                                                                                                "code":200,
@@ -120,6 +127,7 @@ System.ouy.ptinyln();
                                                                                                                                                                                                    "navigateLastPage":1
                                                                                                                                                                                                }
                                                                                                                                                                                            }
+```
 </code></pre></details>
 |搜索符合条件的music|/music/search|get|可选：musicName,musicSinger<br>样例：/music/search?musicName=1|{<br>&nbsp;&nbsp;&nbsp;&nbsp;"message":"success",<br>&nbsp;&nbsp;&nbsp;&nbsp;"code":200,<br>&nbsp;&nbsp;&nbsp;&nbsp;"data":<br>&nbsp;&nbsp;&nbsp;&nbsp;[<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"userId":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicName":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicSinger":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicTime":1,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicLyrics":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"musicPath":"1",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gmtCreated":null,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"isDeleted":0<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;]<br><br>}<br>
 |*上传本地音乐|/music/upload|post|todo|{<br>&nbsp;&nbsp;&nbsp;&nbsp;"message":"success",<br>&nbsp;&nbsp;&nbsp;&nbsp;"code":201,<br>&nbsp;&nbsp;&nbsp;&nbsp;"data":null<br>}<br>
