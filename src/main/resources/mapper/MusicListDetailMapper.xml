@@ -46,9 +46,8 @@
     </sql>
 
     <sql id="MusicListDetail">
-        music_list_detail_id,music_list_id,
-        music_id, user_id, music_name, music_singer, music_time, music_lyrics, music_path,
-        gmt_created
+        tmp.music_list_detail_id,tmp.music_list_id,tmp.gmt_created,
+        m.music_id,m.user_id,m.music_name,m.music_lyrics,m.music_path,m.gmt_created,m.is_deleted
     </sql>
 
 
@@ -56,10 +55,10 @@
         select
         <include refid="MusicListDetail" />
         from (
-          select B.music_list_detail_id,B.music_list_id,B.music_id,B.gmt_created from
-            music_list A right join music_list_detail B on A.music_list_id = B.music_list_id
-          where A.music_list_id = 1 and A.is_deleted = 0 and B.is_deleted = 0
-      ) A left join music B on A.music_id = B.music_id where B.is_deleted = 0
+        select B.music_list_detail_id,B.music_list_id,B.music_id,B.gmt_created from
+        music_list A right join music_list_detail B on A.music_list_id = B.music_list_id
+        where A.music_list_id = #{param1,jdbcType=INTEGER} and A.is_deleted = 0 and B.is_deleted = 0
+        ) tmp left join music m on tmp.music_id = m.music_id where m.is_deleted = 0 order by ${param2}
     </select>
 
 

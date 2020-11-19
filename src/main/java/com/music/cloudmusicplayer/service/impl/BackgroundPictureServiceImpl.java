@@ -31,6 +31,7 @@ public class BackgroundPictureServiceImpl implements BackgroundPictureService {
 
     @Override
     public Integer uploadPicture(BackgroundPicture picture) {
+        picture.setIsDeleted(0);
         backgroundPictureMapper.insert(picture);
         return 1;
     }

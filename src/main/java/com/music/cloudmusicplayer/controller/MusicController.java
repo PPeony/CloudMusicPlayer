@@ -50,7 +50,7 @@ public class MusicController {
 
     //@UserLoginToken
     @GetMapping
-    public Result<PageInfo<Music>> getAllMusic(@RequestParam(required = false,defaultValue = "1",value = "pageNum")Integer pageNum,@RequestParam(required = false,defaultValue = "10",value = "pageSize")Integer pageSize,@RequestParam(required = false,defaultValue = "music_name",value = "type")String type,HttpServletRequest request) {
+    public Result<PageInfo<Music>> getAllMusic(@RequestParam(required = false,defaultValue = "1",value = "pageNum")Integer pageNum,@RequestParam(required = false,defaultValue = "10",value = "pageSize")Integer pageSize,@RequestParam(required = false,defaultValue = "music_id",value = "type")String type,HttpServletRequest request) {
         Integer userId = (Integer)request.getAttribute("userId");
         userId = 1;
         //System.out.println("userId = "+userId+"*");

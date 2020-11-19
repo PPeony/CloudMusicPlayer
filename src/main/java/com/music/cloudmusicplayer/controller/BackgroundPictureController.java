@@ -35,10 +35,12 @@ public class BackgroundPictureController {
     }
 
 
+    //@UserLoginToken
     @PostMapping("/upload")
-    public Result<Integer> uploadPicture(MultipartFile picture,BackgroundPicture backgroundPicture
+    public Result<Integer> uploadPicture(MultipartFile picture
     ,HttpServletRequest request) {
         Result<Integer> result = new Result<>();
+        BackgroundPicture backgroundPicture = new BackgroundPicture();
         String path = CloudMusicUtil.uploadFile(picture,request);
         backgroundPicture.setBackgroundPicturePath(path);
         backgroundPictureService.uploadPicture(backgroundPicture);

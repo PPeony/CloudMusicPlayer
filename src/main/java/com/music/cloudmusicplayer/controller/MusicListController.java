@@ -36,7 +36,9 @@ public class MusicListController {
     }
 
     @GetMapping("/getDetails")
-    public Result<List<MusicListDetail>> getMusicListDetails(Integer musicListId, String type) {
+    public Result<List<MusicListDetail>> getMusicListDetails(Integer musicListId,
+                                                             @RequestParam(required = false,defaultValue = "music_id",
+                                                                     value = "type")String type) {
         Result<List<MusicListDetail>> result = new Result<>();
         System.out.println("getMusicListDetails: "+musicListId+"*"+type);
         List<MusicListDetail> list = musicListService.getMusicListDetails(musicListId,type);
@@ -50,6 +52,7 @@ public class MusicListController {
     public Result<Integer> addMusicList(MusicList musicList, HttpServletRequest request) {
         Result<Integer> result = new Result<>();
         Integer userId = (Integer)request.getAttribute("userId");
+        userId = 1;
         musicList.setUserId(userId);
         musicListService.addMusicList(musicList);
         result.setCode(HttpStatus.OK.value());
