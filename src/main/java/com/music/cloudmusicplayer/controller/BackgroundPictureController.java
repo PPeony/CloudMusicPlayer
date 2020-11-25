@@ -41,7 +41,8 @@ public class BackgroundPictureController {
     ,HttpServletRequest request) {
         Result<Integer> result = new Result<>();
         BackgroundPicture backgroundPicture = new BackgroundPicture();
-        String path = CloudMusicUtil.uploadFile(picture,request);
+        String newName = CloudMusicUtil.uploadFile(picture);
+        String path = CloudMusicUtil.getUrlPath(newName,request);
         backgroundPicture.setBackgroundPicturePath(path);
         backgroundPictureService.uploadPicture(backgroundPicture);
         result.setMessage("success");

@@ -1,8 +1,11 @@
 package com.music.cloudmusicplayer.service.impl;
 
 import com.github.pagehelper.PageInfo;
+import com.music.cloudmusicplayer.dao.MusicListDetailMapper;
+import com.music.cloudmusicplayer.dao.MusicListMapper;
 import com.music.cloudmusicplayer.dao.MusicMapper;
 import com.music.cloudmusicplayer.entity.Music;
+import com.music.cloudmusicplayer.entity.MusicListDetail;
 import com.music.cloudmusicplayer.service.MusicService;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,9 @@ public class MusicServiceImpl implements MusicService {
 
     @Resource
     MusicMapper musicMapper;
+
+    @Resource
+    MusicListDetailMapper musicListDetailMapper;
 
     @Override
     public List<Music> getAllMusicByUserId(Integer userId, String type) {
@@ -42,7 +48,7 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public Integer uploadMusic(Music music) {
         // todo, controller层应该调用一个util，处理出歌名-歌手-时长,
-        //  也就是说，这一层得到的是封装好的music
+        //  也就是说，这一层得到的是封装好的music，待测试
         music.setGmtCreated(new Date());
         music.setIsDeleted(0);
         musicMapper.insert(music);
@@ -58,10 +64,15 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public Integer deleteMusic(Integer musicId) {
         // todo,真实的删除物理路径
+        // 同时删除music表和musicListDetail表
         Music music = new Music();
         music.setIsDeleted(1);
         music.setMusicId(musicId);
         musicMapper.update(music);
+        MusicListDetail detail = new MusicListDetail();
+        detail.setIsDeleted(1);
+        detail.setMusic(music);
+        musicListDetailMapper.update(detail);
         return 1;
     }
 }

@@ -79,9 +79,17 @@ public class MusicController {
                                       HttpServletRequest request) {
         Music music = new Music();
         Result<String> result = new Result<>();
+        // todo ,token replace
         Integer userId = (Integer)request.getAttribute("userId");
+        userId = 1;
         String name = musicFile.getOriginalFilename();
-        String path = CloudMusicUtil.uploadFile(musicFile, request);
+        System.out.println("name = "+name);
+        // 计算歌曲时长
+
+        String newName = CloudMusicUtil.uploadFile(musicFile);
+        int time = getMp3TrackLength(new File(Property.FILE_PATH+newName));
+        System.out.println("new path is => "+(Property.FILE_PATH+newName));
+        String path = CloudMusicUtil.getUrlPath(newName,request);
         // 拆出singer和music_name
         String[] params = name.split("\\.");
         String[] params2 = params[0].split("-");
@@ -93,11 +101,11 @@ public class MusicController {
             music.setMusicName(params2[1]);
             music.setMusicSinger(params2[0]);
         } else {
-            return Result.badRequestResult("type 只能为1和0");
+            return Result.badRequestResult("type 只能为1和2");
         }
         music.setMusicPath(path);
-        // 计算歌曲时长
-        int time = getMp3TrackLength(new File(path));
+
+
         music.setMusicTime(time);
         music.setUserId(userId);
         musicService.uploadMusic(music);

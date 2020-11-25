@@ -18,10 +18,9 @@ public class CloudMusicUtil {
 
     /**
      * @param file 多媒体文件
-	 * @param request HttpServletRequest
      * @return java.lang.String
      */
-    public static String uploadFile(MultipartFile file, HttpServletRequest request) {
+    public static String uploadFile(MultipartFile file) {
 
         //1.后半段目录：  2020/03/15
         String directory = "";
@@ -44,13 +43,19 @@ public class CloudMusicUtil {
         try {
             file.transferTo(newFile);
             //协议 :// ip地址 ：端口号 / 文件目录(/images/2020/03/15/xxx.jpg)
-            String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/musicfile/" + directory + newFileName;
-            System.out.println("图片上传，访问URL：" + url);
-            return url;
+            return newFileName;
+
         } catch (IOException e) {
             e.printStackTrace();
             return "error";
         }
+    }
+
+    public static String getUrlPath(String fileName,HttpServletRequest request) {
+        String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +
+                "/musicfile/" + fileName;
+        System.out.println("图片上传，访问URL：" + url);
+        return url;
     }
 
     /**
