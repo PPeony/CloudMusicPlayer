@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface MusicListMapper {
 
+    List<MusicList> selectBySelective(MusicList musicList);
+
     List<MusicList> selectByUserId(Integer userId);
 
     Integer insert(MusicList musicList);

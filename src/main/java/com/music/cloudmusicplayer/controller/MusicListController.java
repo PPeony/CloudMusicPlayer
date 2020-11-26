@@ -54,7 +54,10 @@ public class MusicListController {
         Integer userId = (Integer)request.getAttribute("userId");
         userId = 1;
         musicList.setUserId(userId);
-        musicListService.addMusicList(musicList);
+        Integer r = musicListService.addMusicList(musicList);
+        if (r != 1) {
+            return Result.badRequestResult("歌单名字已存在");
+        }
         result.setCode(HttpStatus.OK.value());
         result.setMessage("success");
         return result;

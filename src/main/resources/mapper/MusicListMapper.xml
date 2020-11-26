@@ -29,6 +29,26 @@
         music_id, user_id, music_name, music_singer, music_time, music_lyrics, music_path, gmt_created, is_deleted
     </sql>
 
+    <select id="selectBySelective" resultMap="MusicListMap">
+        select
+        <include refid="Music_List" />
+        from music_list
+        <where>
+            <if test="musicListId != null">
+                and music_list_id = #{musicListId,jdbcType=INTEGER}
+            </if>
+            <if test="musicListName != null">
+                and music_list_name = #{musicListName,jdbcType=VARCHAR}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted,jdbcType=INTEGER}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
     <select id="selectByUserId" resultMap="MusicListMap">
         select
         <include refid="Music_List" />

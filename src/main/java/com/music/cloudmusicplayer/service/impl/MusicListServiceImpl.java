@@ -38,6 +38,13 @@ public class MusicListServiceImpl implements MusicListService {
 
     @Override
     public Integer addMusicList(MusicList musicList) {
+        MusicList origin = new MusicList();
+        musicList.setIsDeleted(0);
+        musicList.setMusicListName(musicList.getMusicListName());
+        List<MusicList> origins = musicListMapper.selectBySelective(origin);
+        if (origins.size() != 0) {
+            return -1;
+        }
         musicList.setGmtCreated(new Date());
         musicList.setIsDeleted(0);
         musicListMapper.insert(musicList);
