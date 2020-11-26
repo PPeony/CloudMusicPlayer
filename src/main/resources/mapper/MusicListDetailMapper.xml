@@ -47,7 +47,7 @@
 
     <sql id="MusicListDetail">
         tmp.music_list_detail_id,tmp.music_list_id,tmp.gmt_created,
-        m.music_id,m.user_id,m.music_name,m.music_lyrics,m.music_path,m.gmt_created,m.is_deleted
+        m.music_id,m.user_id,m.music_singer,m.music_time,m.music_name,m.music_lyrics,m.music_path,m.gmt_created,m.is_deleted
     </sql>
 
     <sql id="MusicListDetailOrigin">

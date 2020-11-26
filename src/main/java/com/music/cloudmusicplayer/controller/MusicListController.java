@@ -42,6 +42,7 @@ public class MusicListController {
         Result<List<MusicListDetail>> result = new Result<>();
         System.out.println("getMusicListDetails: "+musicListId+"*"+type);
         List<MusicListDetail> list = musicListService.getMusicListDetails(musicListId,type);
+        System.out.println(list);
         result.setData(list);
         result.setCode(HttpStatus.OK.value());
         result.setMessage("success");
