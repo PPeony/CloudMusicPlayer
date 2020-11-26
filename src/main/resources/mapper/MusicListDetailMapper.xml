@@ -50,6 +50,29 @@
         m.music_id,m.user_id,m.music_name,m.music_lyrics,m.music_path,m.gmt_created,m.is_deleted
     </sql>
 
+    <sql id="MusicListDetailOrigin">
+        music_list_detail_id,music_list_id,music_id,gmt_created,is_deleted
+    </sql>
+
+    <select id="selectBySelective" resultMap="MusicListDetailMap">
+        select <include refid="MusicListDetailOrigin" />
+        from music_list_detail
+        <where>
+            <if test="musicListDetailId != null">
+                and music_list_detail_id = #{musicListDetailId,jdbcType=INTEGER}
+            </if>
+            <if test="musicListId != null">
+                and music_list_id = #{musicListId,jdbcType=INTEGER}
+            </if>
+            <if test="music.musicId != null">
+                and music_id = #{music.musicId,jdbcType=INTEGER}
+            </if>
+            <if test="isDeleted != null">
+                and is_deleted = #{isDeleted,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
 
     <select id="selectByMusicListId" resultMap="MusicListDetailMap">
         select
@@ -75,9 +98,6 @@
     <update id="update" parameterType="com.music.cloudmusicplayer.entity.MusicListDetail">
         update music_list_detail
         <set>
-            <if test="musicListId != null">
-                music_list_id = #{musicListId,jdbcType=INTEGER},
-            </if>
             <if test="music.musicId != null">
                 music_id = #{music.musicId,jdbcType=INTEGER},
             </if>
@@ -89,7 +109,7 @@
             <if test="musicListDetailId != null">
                 and music_list_detail_id = #{musicListDetailId,jdbcType=INTEGER}
             </if>
-            <if test="musicId != null">
+            <if test="music.musicId != null">
                 and music_id = #{music.musicId,jdbcType=INTEGER}
             </if>
             <if test="musicListId != null">

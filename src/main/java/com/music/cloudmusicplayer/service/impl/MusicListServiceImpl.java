@@ -52,6 +52,17 @@ public class MusicListServiceImpl implements MusicListService {
 
     @Override
     public Integer addMusicToList(Integer musicId, Integer musicListId) {
+        // list内不能有重复音乐
+        MusicListDetail origin = new MusicListDetail();
+        origin.setIsDeleted(0);
+        origin.setMusic(new Music());
+        origin.getMusic().setMusicId(musicId);
+        origin.setMusicListId(musicListId);
+        List<MusicListDetail> origins = musicListDetailMapper.selectBySelective(origin);
+        if (origins.size() != 0) {
+            // 歌曲已经在歌单中
+            return -1;
+        }
         // 包装成detail
         MusicListDetail detail = new MusicListDetail();
         detail.setGmtCreated(new Date());
@@ -82,6 +93,8 @@ public class MusicListServiceImpl implements MusicListService {
         musicListMapper.update(musicList);
         MusicListDetail detail = new MusicListDetail();
         detail.setMusicListId(musicListId);
+        detail.setMusic(new Music());
+        detail.setIsDeleted(1);
         musicListDetailMapper.update(detail);
         return 1;
     }

@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface MusicListDetailMapper {
 
+    List<MusicListDetail> selectBySelective(MusicListDetail detail);
+
     List<MusicListDetail> selectByMusicListId(Integer musicListId,String type);
 
     Integer insert(MusicListDetail detail);

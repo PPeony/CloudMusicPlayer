@@ -63,7 +63,7 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public Integer deleteMusic(Integer musicId) {
-        // todo,真实的删除物理路径
+        // todo,删除物理路径下文件
         // 同时删除music表和musicListDetail表
         Music music = new Music();
         music.setIsDeleted(1);

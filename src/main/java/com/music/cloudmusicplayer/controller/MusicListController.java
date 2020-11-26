@@ -72,7 +72,10 @@ public class MusicListController {
     @PostMapping("/addMusic")
     public Result<Integer> addMusicToMusicList(Integer musicId,Integer musicListId) {
         Result<Integer> result = new Result<>();
-        musicListService.addMusicToList(musicId,musicListId);
+        Integer r = musicListService.addMusicToList(musicId,musicListId);
+        if (r != 1) {
+            return Result.badRequestResult("该歌曲已存在于该歌单");
+        }
         result.setCode(HttpStatus.OK.value());
         result.setMessage("success");
         return result;
