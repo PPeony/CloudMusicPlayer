@@ -24,6 +24,7 @@ public class BackgroundPictureController {
     BackgroundPictureService backgroundPictureService;
 
 
+    @UserLoginToken
     @GetMapping("/{userId}")
     public Result<BackgroundPicture> getUserPicture(@PathVariable Integer userId) {
         Result<BackgroundPicture> result = new Result<>();
@@ -35,7 +36,7 @@ public class BackgroundPictureController {
     }
 
 
-    //@UserLoginToken
+    @UserLoginToken
     @PostMapping("/upload")
     public Result<Integer> uploadPicture(MultipartFile picture
     ,HttpServletRequest request) {
@@ -50,6 +51,7 @@ public class BackgroundPictureController {
         return result;
     }
 
+    @UserLoginToken
     @DeleteMapping("/delete/{backgroundPictureId}")
     public Result<Integer> deletePicture(@PathVariable Integer backgroundPictureId) {
         Result<Integer> result = new Result<>();

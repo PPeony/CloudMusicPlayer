@@ -78,6 +78,7 @@ public class UserServiceImpl implements UserService {
                 return 0;
             }
         }
+        user.setUserPassword(CloudMusicUtil.MD5(user.getUserPassword()));
         user.setGmtModified(new Date());
         userMapper.update(user);
         return 1;

@@ -47,8 +47,6 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public Integer uploadMusic(Music music) {
-        // todo, controller层应该调用一个util，处理出歌名-歌手-时长,
-        //  也就是说，这一层得到的是封装好的music，待测试
         music.setGmtCreated(new Date());
         music.setIsDeleted(0);
         musicMapper.insert(music);

@@ -63,4 +63,10 @@ public interface MusicListService {
      */
     Integer deleteMusicList(Integer musicListId);
 
+    /** 从所有列表中删除这个music
+     * @param musicId
+     * @return java.lang.Integer
+     */
+    Integer deleteMusicFromAllList(Integer musicId);
+
 }

@@ -89,7 +89,7 @@
     <insert id="insert" parameterType="com.music.cloudmusicplayer.entity.MusicListDetail">
         insert into music_list_detail (music_list_id,music_id,gmt_created,is_deleted
         )
-        values (#{musicListId,jdbcType=INTEGER},#{musicId,jdbcType=INTEGER},
+        values (#{musicListId,jdbcType=INTEGER},#{music.musicId,jdbcType=INTEGER},
                 #{gmtCreated,jdbcType=TIMESTAMP},#{isDeleted,jdbcType=INTEGER}
                )
     </insert>

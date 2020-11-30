@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.music.cloudmusicplayer.common.Property;
 import com.music.cloudmusicplayer.entity.Music;
+import com.music.cloudmusicplayer.service.MusicListService;
 import com.music.cloudmusicplayer.service.MusicService;
 import com.music.cloudmusicplayer.util.CloudMusicUtil;
 import com.music.cloudmusicplayer.util.Result;
@@ -32,8 +33,12 @@ public class MusicController {
     @Resource
     MusicService musicService;
 
+    @Resource
+    MusicListService musicListService;
 
 
+
+    @UserLoginToken
     @GetMapping("/{musicId}")
     public Result<Music> getMusic(@PathVariable Integer musicId) {
         //System.out.println("getMusic: "+musicId+"*"+token);
@@ -48,11 +53,10 @@ public class MusicController {
         return result;
     }
 
-    //@UserLoginToken
+    @UserLoginToken
     @GetMapping
     public Result<PageInfo<Music>> getAllMusic(@RequestParam(required = false,defaultValue = "1",value = "pageNum")Integer pageNum,@RequestParam(required = false,defaultValue = "10",value = "pageSize")Integer pageSize,@RequestParam(required = false,defaultValue = "music_id",value = "type")String type,HttpServletRequest request) {
-        Integer userId = (Integer)request.getAttribute("userId");
-        userId = 1;
+        Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
         //System.out.println("userId = "+userId+"*");
         Result<PageInfo<Music>> result = new Result<>();
         PageHelper.startPage(pageNum,pageSize);
@@ -63,6 +67,7 @@ public class MusicController {
         return result;
     }
 
+    @UserLoginToken
     @GetMapping("/search")
     public Result<List<Music>> searchMusic(Music music) {
         Result<List<Music>> result = new Result<>();
@@ -73,39 +78,35 @@ public class MusicController {
         return result;
     }
 
+    @UserLoginToken
     @PostMapping("/upload")
     public Result<String> uploadMusic(MultipartFile musicFile,
-                                      @RequestParam(required = false,defaultValue = "1",value = "type") Integer type,
+                                      @RequestParam(required = false,defaultValue = "1",value = "type") String type,
                                       HttpServletRequest request) {
         Music music = new Music();
         Result<String> result = new Result<>();
-        // todo ,token replace
-        Integer userId = (Integer)request.getAttribute("userId");
-        userId = 1;
+        Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
         String name = musicFile.getOriginalFilename();
         System.out.println("name = "+name);
-        // 计算歌曲时长
-
-        String newName = CloudMusicUtil.uploadFile(musicFile);
-        int time = getMp3TrackLength(new File(Property.FILE_PATH+newName));
-        System.out.println("new path is => "+(Property.FILE_PATH+newName));
-        String path = CloudMusicUtil.getUrlPath(newName,request);
         // 拆出singer和music_name
         String[] params = name.split("\\.");
         String[] params2 = params[0].split("-");
         // type-1:musicName-singer,type-2:singer-musicName,default is 1
-        if (type == 1) {
+        if ("1".equals(type)) {
             music.setMusicName(params2[0]);
             music.setMusicSinger(params2[1]);
-        } else if (type ==2){
+        } else if ("2".equals(type)){
             music.setMusicName(params2[1]);
             music.setMusicSinger(params2[0]);
         } else {
             return Result.badRequestResult("type 只能为1和2");
         }
+        // 计算歌曲时长
+        String newName = CloudMusicUtil.uploadFile(musicFile);
+        int time = getMp3TrackLength(new File(Property.FILE_PATH+newName));
+        System.out.println("new path is => "+(Property.FILE_PATH+newName));
+        String path = CloudMusicUtil.getUrlPath(newName,request);
         music.setMusicPath(path);
-
-
         music.setMusicTime(time);
         music.setUserId(userId);
         musicService.uploadMusic(music);
@@ -125,10 +126,11 @@ public class MusicController {
         }
     }
 
+    @UserLoginToken
     @PostMapping("/uploadByUrl")
     public Result<String> uploadMusicByUrl(Music music,HttpServletRequest request) {
         Result<String> result = new Result<>();
-        Integer userId = (Integer)request.getAttribute("userId");
+        Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
         music.setUserId(userId);
         musicService.uploadMusic(music);
         result.setCode(HttpStatus.CREATED.value());
@@ -136,6 +138,7 @@ public class MusicController {
         return result;
     }
 
+    @UserLoginToken
     @PutMapping("/update")
     public Result<Integer> updateMusic(Music music) {
         Result<Integer> result = new Result<>();
@@ -145,11 +148,13 @@ public class MusicController {
         return result;
     }
 
+    @UserLoginToken
     @DeleteMapping("/delete/{musicId}")
     public Result<Integer> deleteMusic(@PathVariable Integer musicId) {
         Result<Integer> result = new Result<>();
         musicService.deleteMusic(musicId);
-        // todo,同时删除musicList的
+        // todo,同时删除musicList的，未测试
+        musicListService.deleteMusicFromAllList(musicId);
         result.setCode(HttpStatus.OK.value());
         result.setMessage("success");
         return result;

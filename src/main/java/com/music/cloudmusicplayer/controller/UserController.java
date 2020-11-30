@@ -12,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -30,7 +31,6 @@ public class UserController {
     @PostMapping("/login")
     public Result<User> login(@RequestBody User user, HttpServletResponse response) {
         Result<Integer> result = new Result<>();
-
         if (CloudMusicUtil.checkString(user.getUserName()) ||
         CloudMusicUtil.checkString(user.getUserPassword())) {
             return Result.badRequestResult("请输入用户名或密码");
@@ -42,14 +42,18 @@ public class UserController {
         }
         String token = TokenUtil.getToken(selectedUser);
         response.setHeader("token",token);
+        response.addHeader("Access-Control-Expose-Headers","token");
         return Result.generateSuccessfulResult(selectedUser);
     }
 
     // 测试token
     @UserLoginToken
     @GetMapping("/testToken")
-    public Result<Integer> testToken() {
+    public Result<Integer> testToken(HttpServletRequest request) {
         Result<Integer> result = new Result<>();
+        //System.out.println("testToken = "+request.getParameter("userId"));
+        Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
+        System.out.println(userId);
         System.out.println("success");
         return Result.generateSuccessfulResult(null);
     }
@@ -93,7 +97,7 @@ public class UserController {
         return result;
     }
 
-    //@UserLoginToken
+    @UserLoginToken
     @PutMapping("/modify")
     public Result<Integer> modifyPersonalMsg(@RequestBody User user) {
 //        System.out.println("modify: "+user);
