@@ -40,7 +40,7 @@ __2. 未登录的操作全部返回如下形式，带有*为需登录才能操�
 |*添加歌单|/list/add|post|{<br>"musicListName": "demoData"<br>}|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}|{<br>&nbsp;&nbsp;&nbsp;&nbsp;"message":"歌单名字已存在",<br>&nbsp;&nbsp;&nbsp;&nbsp;"code":400,<br>&nbsp;&nbsp;&nbsp;&nbsp;"data":null<br>}<br>
 |修改歌单|/list/update|post|均必传<br>{<br>"musicListName": "demoData",<br>"musicListId": 123<br>}|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
 |添加音乐进歌单|/list/addMusic|post|均必传<br>{<br>"musicId":123,<br>"musicListId":666<br>}|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}|{<br>&nbsp;&nbsp;&nbsp;&nbsp;"message":"该歌曲已存在于该歌单",<br>&nbsp;&nbsp;&nbsp;&nbsp;"code":400,<br>&nbsp;&nbsp;&nbsp;&nbsp;"data":null<br>}<br>
-|删除歌单的某个音乐|/list/deleteMusic|delete|均必传<br>{<br>"musicId":123,<br>"musicListId":666<br>}|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
+|删除歌单的某个音乐|/list/deleteMusic/{musicListDetailId}|delete|/list/delete/123|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
 |删除整个歌单|/list/delete/{musicListId}|delete|/list/delete/123|{<br>"message":"success",<br>"code":200,<br>"data":null<br>}
 
 ## BackgroundPicture
