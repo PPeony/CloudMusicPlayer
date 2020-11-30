@@ -94,11 +94,11 @@ public class MusicController {
         String[] params2 = params[0].split("-");
         // type-1:musicName-singer,type-2:singer-musicName,default is 1
         if ("1".equals(type)) {
-            music.setMusicName(params2[0]);
-            music.setMusicSinger(params2[1]);
+            music.setMusicName(params2[0].trim());
+            music.setMusicSinger(params2[1].trim());
         } else if ("2".equals(type)){
-            music.setMusicName(params2[1]);
-            music.setMusicSinger(params2[0]);
+            music.setMusicName(params2[1].trim());
+            music.setMusicSinger(params2[0].trim());
         } else {
             return Result.badRequestResult("type 只能为1和2");
         }

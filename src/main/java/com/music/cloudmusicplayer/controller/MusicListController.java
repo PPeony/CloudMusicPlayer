@@ -40,8 +40,8 @@ public class MusicListController {
 
     @UserLoginToken
     @GetMapping("/getDetails")
-    public Result<List<MusicListDetail>> getMusicListDetails(@RequestBody Integer musicListId,
-                                                             @RequestBody @RequestParam(required = false,defaultValue =
+    public Result<List<MusicListDetail>> getMusicListDetails(Integer musicListId,
+                                                             @RequestParam(required = false,defaultValue =
                                                                      "music_id",
                                                                      value = "type")String type) {
         Result<List<MusicListDetail>> result = new Result<>();
