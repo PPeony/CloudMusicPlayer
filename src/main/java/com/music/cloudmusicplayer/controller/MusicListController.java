@@ -40,8 +40,9 @@ public class MusicListController {
 
     @UserLoginToken
     @GetMapping("/getDetails")
-    public Result<List<MusicListDetail>> getMusicListDetails(Integer musicListId,
-                                                             @RequestParam(required = false,defaultValue = "music_id",
+    public Result<List<MusicListDetail>> getMusicListDetails(@RequestBody Integer musicListId,
+                                                             @RequestBody @RequestParam(required = false,defaultValue =
+                                                                     "music_id",
                                                                      value = "type")String type) {
         Result<List<MusicListDetail>> result = new Result<>();
         System.out.println("getMusicListDetails: "+musicListId+"*"+type);
@@ -55,7 +56,7 @@ public class MusicListController {
 
     @UserLoginToken
     @PostMapping("/add")
-    public Result<Integer> addMusicList(MusicList musicList, HttpServletRequest request) {
+    public Result<Integer> addMusicList(@RequestBody MusicList musicList, HttpServletRequest request) {
         Result<Integer> result = new Result<>();
         Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
         musicList.setUserId(userId);
@@ -70,7 +71,8 @@ public class MusicListController {
 
     @UserLoginToken
     @PutMapping("/update")
-    public Result<Integer> updateMusicList(MusicList musicList) {
+    public Result<Integer> updateMusicList(@RequestBody MusicList musicList) {
+        System.out.println(musicList);
         Result<Integer> result = new Result<>();
         musicListService.updateMusicList(musicList);
         result.setCode(HttpStatus.CREATED.value());
@@ -95,8 +97,9 @@ public class MusicListController {
     }
 
     @UserLoginToken
-    @DeleteMapping("/deleteMusic")
-    public Result<Integer> deleteMusicFromMusicList(Integer musicListDetailId) {
+    @DeleteMapping("/deleteMusic/{musicListDetailId}")
+    public Result<Integer> deleteMusicFromMusicList(@PathVariable Integer musicListDetailId) {
+        System.out.println(musicListDetailId);
         Result<Integer> result = new Result<>();
         musicListService.deleteMusicFromList(musicListDetailId);
         result.setCode(HttpStatus.OK.value());

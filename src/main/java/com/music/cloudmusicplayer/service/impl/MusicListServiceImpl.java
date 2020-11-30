@@ -39,8 +39,9 @@ public class MusicListServiceImpl implements MusicListService {
     @Override
     public Integer addMusicList(MusicList musicList) {
         MusicList origin = new MusicList();
-        musicList.setIsDeleted(0);
-        musicList.setMusicListName(musicList.getMusicListName());
+        origin.setIsDeleted(0);
+        origin.setMusicListName(musicList.getMusicListName());
+        System.out.println(origin);
         List<MusicList> origins = musicListMapper.selectBySelective(origin);
         if (origins.size() != 0) {
             return -1;

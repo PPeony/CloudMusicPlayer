@@ -70,6 +70,7 @@ public class MusicController {
     @UserLoginToken
     @GetMapping("/search")
     public Result<List<Music>> searchMusic(Music music) {
+        System.out.println(music);
         Result<List<Music>> result = new Result<>();
         List<Music> list = musicService.searchMusic(music);
         result.setCode(HttpStatus.OK.value());
@@ -128,7 +129,7 @@ public class MusicController {
 
     @UserLoginToken
     @PostMapping("/uploadByUrl")
-    public Result<String> uploadMusicByUrl(Music music,HttpServletRequest request) {
+    public Result<String> uploadMusicByUrl(@RequestBody Music music,HttpServletRequest request) {
         Result<String> result = new Result<>();
         Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
         music.setUserId(userId);
@@ -140,7 +141,7 @@ public class MusicController {
 
     @UserLoginToken
     @PutMapping("/update")
-    public Result<Integer> updateMusic(Music music) {
+    public Result<Integer> updateMusic(@RequestBody Music music) {
         Result<Integer> result = new Result<>();
         musicService.updateMusic(music);
         result.setCode(HttpStatus.CREATED.value());
