@@ -58,7 +58,7 @@ public class MusicListController {
     @PostMapping("/add")
     public Result<Integer> addMusicList(@RequestBody MusicList musicList, HttpServletRequest request) {
         Result<Integer> result = new Result<>();
-        Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
+        Integer userId = (Integer)request.getAttribute("userId");
         musicList.setUserId(userId);
         Integer r = musicListService.addMusicList(musicList);
         if (r != 1) {

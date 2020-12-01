@@ -40,7 +40,7 @@ public class UserController {
         if (selectedUser == null) {
             return Result.badRequestResult("用户名或者密码错误");
         }
-        String token = TokenUtil.getToken(selectedUser);
+        String token = TokenUtil.generateToken(selectedUser);
         response.setHeader("token",token);
         response.addHeader("Access-Control-Expose-Headers","token");
         return Result.generateSuccessfulResult(selectedUser);
@@ -52,7 +52,7 @@ public class UserController {
     public Result<Integer> testToken(HttpServletRequest request) {
         Result<Integer> result = new Result<>();
         //System.out.println("testToken = "+request.getParameter("userId"));
-        Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
+        Integer userId = (Integer)request.getAttribute("userId");
         System.out.println(userId);
         System.out.println("success");
         return Result.generateSuccessfulResult(null);

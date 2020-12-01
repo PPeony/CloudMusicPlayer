@@ -56,7 +56,7 @@ public class MusicController {
     @UserLoginToken
     @GetMapping
     public Result<PageInfo<Music>> getAllMusic(@RequestParam(required = false,defaultValue = "1",value = "pageNum")Integer pageNum,@RequestParam(required = false,defaultValue = "10",value = "pageSize")Integer pageSize,@RequestParam(required = false,defaultValue = "music_id",value = "type")String type,HttpServletRequest request) {
-        Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
+        Integer userId = (Integer) request.getAttribute("userId");
         //System.out.println("userId = "+userId+"*");
         Result<PageInfo<Music>> result = new Result<>();
         PageHelper.startPage(pageNum,pageSize);
@@ -86,7 +86,7 @@ public class MusicController {
                                       HttpServletRequest request) {
         Music music = new Music();
         Result<String> result = new Result<>();
-        Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
+        Integer userId = (Integer)(request.getAttribute("userId"));
         String name = musicFile.getOriginalFilename();
         System.out.println("name = "+name);
         // 拆出singer和music_name
@@ -131,7 +131,7 @@ public class MusicController {
     @PostMapping("/uploadByUrl")
     public Result<String> uploadMusicByUrl(@RequestBody Music music,HttpServletRequest request) {
         Result<String> result = new Result<>();
-        Integer userId = Integer.valueOf((String)request.getAttribute("userId"));
+        Integer userId = (Integer)(request.getAttribute("userId"));
         music.setUserId(userId);
         musicService.uploadMusic(music);
         result.setCode(HttpStatus.CREATED.value());

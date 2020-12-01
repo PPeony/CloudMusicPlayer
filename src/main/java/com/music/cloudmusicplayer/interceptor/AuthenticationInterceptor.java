@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.music.cloudmusicplayer.config.TokenException;
 import com.music.cloudmusicplayer.entity.User;
 import com.music.cloudmusicplayer.service.UserService;
+import com.music.cloudmusicplayer.util.TokenUtil;
 import com.music.cloudmusicplayer.util.annotations.PassToken;
 import com.music.cloudmusicplayer.util.annotations.UserLoginToken;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
@@ -57,11 +58,20 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             if (userLoginToken.required()) {
                 // 执行认证
                 if (token == null) {
-
                     throw new TokenException("无token，请重新登录");
                 }
                 // 获取 token 中的 user id
-                String userId;
+                Integer result = TokenUtil.verifyToken(token);
+                System.out.println("token 解析得到userId是 "+result);
+                if (result == null) {
+                    throw new TokenException("token解析错误");
+                }
+                httpServletRequest.setAttribute("userId",result);
+                String refreshedToken = TokenUtil.refreshToken(token);
+                httpServletResponse.setHeader("access_token", refreshedToken);
+                httpServletResponse.addHeader("Access-Control-Expose-Headers","token");
+                //======
+                /*
                 try {
                     userId = JWT.decode(token).getAudience().get(0);
                     System.out.println("get userId = "+userId);
@@ -88,7 +98,11 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     throw new TokenException("token解析错误");
                 }
                 return true;
+
+                 */
             }
+
+
         }
         return true;
     }
