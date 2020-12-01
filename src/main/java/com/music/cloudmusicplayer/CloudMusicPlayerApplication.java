@@ -12,5 +12,4 @@ public class CloudMusicPlayerApplication {
         SpringApplication.run(CloudMusicPlayerApplication.class, args);
     }
 
-    // todo,除了登录以外都应该对未登录用户拦截
 }
