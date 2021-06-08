@@ -41,6 +41,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         System.out.println(" find token is:"+token+"====");
         // 如果不是映射到方法直接通过
         if (!(object instanceof HandlerMethod)) {
+            System.out.println(httpServletRequest+" accessed");
             return true;
         }
         HandlerMethod handlerMethod = (HandlerMethod) object;
