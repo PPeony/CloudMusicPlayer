@@ -1,4 +1,6 @@
 # CloudMusicPlayer
+> 可以作为：数据库作业/课程设计等软件作业
+
 __docker:[my docker repository](https://hub.docker.com/repository/docker/cpeony/cloud-music-player)__
 
 You can store your music on cloud.You can upload them by url or files. And pay attention, one person can only listen the music which uploaded by himself.That is to say , Bob uploads the music *Queen-Bohemian Rhapsody* , Alice has never uploaded this file, so Alice cannot listen *Bohemian Rhapsody* .What a pity ! (I don't want to have unnecessary copyright disputes, so I deliberately designed it like this)
