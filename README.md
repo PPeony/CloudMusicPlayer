@@ -10,7 +10,7 @@ You can store your music on cloud.You can upload them by url or files. And pay a
 ## These are final results.
 ### This is the page when you are not logged in. At this time, you need to click on the top right corner to register or log in.
 ![not logged in view](https://img-blog.csdnimg.cn/20210608162241806.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1NzY0NDc3,size_16,color_FFFFFF,t_70#pic_center)
-### When you click "登录" button, you will be redirect to login view.
+### When you click "登录" button, you will be redirected to login view.
 ![login](https://img-blog.csdnimg.cn/20210608161621443.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1NzY0NDc3,size_16,color_FFFFFF,t_70#pic_center)
 ### This view is to upload music, you can upload files or input url.
 ![upload fils](https://img-blog.csdnimg.cn/20210608163415229.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1NzY0NDc3,size_16,color_FFFFFF,t_70#pic_center)
