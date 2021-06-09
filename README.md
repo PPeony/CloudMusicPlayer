@@ -5,8 +5,10 @@ __docker:[my docker repository](https://hub.docker.com/repository/docker/cpeony/
 
 You can store your music on cloud.You can upload them by url or files. And pay attention, one person can only listen the music which uploaded by himself.That is to say , Bob uploads the music *Queen-Bohemian Rhapsody* , Alice has never uploaded this file, so Alice cannot listen *Bohemian Rhapsody* .What a pity ! (I don't want to have unnecessary copyright disputes, so I deliberately designed it like this)
 ## How to run?
-1. ```docker run cpeony/cloud-music-player```.If you don't have this image ,it will pull from repository automatically.
-2.  You can visit "ip:8080/index.html" to see the view.
+1. It is based on MySql.So you need to create a database called cloud_music_player, and the username is "root" ,the 
+   password is "123456!".Also, you can clone the project and change "application.properties" file.
+2. ```docker run cpeony/cloud-music-player``` .If you don't have this image ,it will pull from repository automatically.
+3.  You can visit "ip:8080/index.html" to see the view.
 ## These are final results.
 ### This is the page when you are not logged in. At this time, you need to click on the top right corner to register or log in.
 ![not logged in view](https://img-blog.csdnimg.cn/20210608162241806.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1NzY0NDc3,size_16,color_FFFFFF,t_70#pic_center)
