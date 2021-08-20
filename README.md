@@ -19,6 +19,9 @@ You can store your music on cloud.You can upload them by url or files. And pay a
 ### This view is to upload music, you can upload files or input url.
 ![upload fils](https://img-blog.csdnimg.cn/20210608163415229.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE1NzY0NDc3,size_16,color_FFFFFF,t_70#pic_center)
 
+## API doc
+[api_doc](https://github.com/PPeony/CloudMusicPlayer/blob/master/cloud_music_api.md)
+
 ## Others
 __Here is only backend code, front code click here:[https://github.com/PPPkanZTouti3/CloudMusicPlayer](https://github.%20com/PPPkanZTouti3/CloudMusicPlayer)__
 
